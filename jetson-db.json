@@ -1,0 +1,72 @@
+{
+  "database": "gameverse",
+  "version": 1,
+  "games": [
+    {
+      "id": 1,
+      "type": "Игра",
+      "title": "Neon Rift",
+      "genre": "Action",
+      "tags": [
+        "PvP",
+        "Sci-Fi",
+        "3D"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "Игра",
+      "title": "Kingdoms of Ember",
+      "genre": "RPG",
+      "tags": [
+        "RPG",
+        "Fantasy",
+        "Boss"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "Карта",
+      "title": "Cyber District",
+      "genre": "Map",
+      "tags": [
+        "Urban",
+        "Tactical",
+        "PvP"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "Карта",
+      "title": "Frozen Outpost",
+      "genre": "Map",
+      "tags": [
+        "Snow",
+        "Strategy",
+        "Co-op"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "Игра",
+      "title": "Skybound Racers",
+      "genre": "Racing",
+      "tags": [
+        "Racing",
+        "Arcade",
+        "Online"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "Карта",
+      "title": "Jungle Temple",
+      "genre": "Map",
+      "tags": [
+        "Adventure",
+        "Puzzle",
+        "Explore"
+      ]
+    }
+  ]
+}
