@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GAMEVERSE — Games</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial;color:#fff;background:#070712}header{text-align:center;padding:65px 20px 30px}h1{font-size:clamp(44px,8vw,82px);letter-spacing:4px}header p{color:#aaa}
+.controls{max-width:1050px;margin:auto;padding:0 20px 25px;display:flex;gap:12px}.controls input,.controls select{flex:1;padding:15px;border-radius:14px;border:1px solid #ffffff22;background:#ffffff0d;color:#fff}
+.grid{max-width:1050px;margin:auto;padding:10px 20px 70px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.card-container{perspective:1100px;min-height:370px;cursor:pointer}.card{position:relative;min-height:370px;height:100%;transform-style:preserve-3d;transition:.65s}.card-container:hover .card{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid #ffffff22;border-radius:25px;padding:28px;background:#ffffff0d;box-shadow:0 20px 50px #0008;display:flex;flex-direction:column}.front{justify-content:center;align-items:center;text-align:center}.back{transform:rotateY(180deg);justify-content:center}.icon{font-size:72px}h2{font-size:29px}.genre{color:#a78bfa;font-weight:bold}.desc{color:#aaa;line-height:1.6}.tags{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tag{padding:7px 11px;border-radius:99px;background:#8b5cf633}.btn{margin-top:auto;padding:13px;border:0;border-radius:13px;background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;font-weight:bold;cursor:pointer}
+</style></head><body>
+<header><h1>GAMEVERSE</h1><p>Hover to flip. Click any card to open its own HTML game site.</p></header>
+<div class="controls"><input id="search" placeholder="Search games..."><select id="filter"><option value="all">All types</option><option>Action</option><option>Fighting</option><option>Racing</option><option>Adventure</option><option>Strategy</option></select></div>
+<main id="grid" class="grid"></main>
+<script>
+const games=[{"slug": "neon-rift", "title": "Neon Rift", "icon": "⚡", "genre": "Action • Sci-Fi • PvP", "description": "A fast futuristic arena shooter where neon technology, tactical movement, and intense PvP battles collide.", "tags": ["PvP", "Sci-Fi", "3D"]}, {"slug": "shadow-arena", "title": "Shadow Arena", "icon": "🌑", "genre": "Fighting • Fantasy • Multiplayer", "description": "Enter a dark fantasy arena and battle rival champions using powerful abilities, combos, and tactical movement.", "tags": ["Fighting", "Fantasy", "Multiplayer"]}, {"slug": "cyber-racers", "title": "Cyber Racers", "icon": "🏎️", "genre": "Racing • Cyberpunk • Arcade", "description": "Race through futuristic cities at impossible speeds while mastering sharp turns, boosts, and dangerous shortcuts.", "tags": ["Racing", "Cyberpunk", "Arcade"]}, {"slug": "pixel-quest", "title": "Pixel Quest", "icon": "🧙", "genre": "Adventure • RPG • Pixel", "description": "Explore a colorful pixel world, discover hidden treasures, solve puzzles, and build your hero into a legendary adventurer.", "tags": ["RPG", "Adventure", "Pixel"]}, {"slug": "galaxy-war", "title": "Galaxy War", "icon": "🚀", "genre": "Strategy • Space • Multiplayer", "description": "Command your fleet across the galaxy, expand your territory, research technology, and defeat competing space empires.", "tags": ["Strategy", "Space", "Multiplayer"]}];
+const grid=document.getElementById("grid"),search=document.getElementById("search"),filter=document.getElementById("filter");
+function render(){
+ const q=search.value.toLowerCase(),f=filter.value.toLowerCase();
+ grid.innerHTML="";
+ games.filter(g=>(!q||(g.title+" "+g.genre+" "+g.description+" "+g.tags.join(" ")).toLowerCase().includes(q))&&(f==="all"||g.genre.toLowerCase().includes(f))).forEach(g=>{
+  const c=document.createElement("div");c.className="card-container";c.tabIndex=0;
+  c.innerHTML='<article class="card"><div class="face front"><div class="icon">'+g.icon+'</div><h2>'+g.title+'</h2><div class="genre">'+g.genre+'</div><p class="desc">'+g.description+'</p></div><div class="face back"><div class="icon">'+g.icon+'</div><h2>'+g.title+'</h2><div class="genre">'+g.genre+'</div><p class="desc">'+g.description+'</p><div class="tags">'+g.tags.map(t=>'<span class="tag">'+t+'</span>').join("")+'</div><button class="btn">🎮 Open Game</button></div></article>';
+  const open=()=>location.href="games/"+g.slug+".html";
+  c.onclick=e=>{if(!e.target.closest("button"))open()};c.querySelector("button").onclick=e=>{e.stopPropagation();open()};c.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}};
+  grid.appendChild(c);
+ });
+}
+search.oninput=filter.onchange=render;render();
+</script></body></html>
